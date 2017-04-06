@@ -51,13 +51,13 @@ public class Enemy {
 		else{
 			/**/if(checkpointreached()){
 				currentCheckpoint++;
-			}// else{
-				//x += Clock.delta() * checkpoints.get(currentCheckpoint).getxDirection();
-				//y += Clock.delta() * checkpoints.get(currentCheckpoint).getyDirection();
-			//}/**/
+			} else{
+				x += Clock.delta() * checkpoints.get(currentCheckpoint).getxDirection() * speed;
+				y += Clock.delta() * checkpoints.get(currentCheckpoint).getyDirection() * speed;
+			}/**/
 			//findNextDirection(s);
-			x += Clock.delta()* speed * directions[0];
-			y += Clock.delta()* speed * directions[1];
+			//x += Clock.delta()* speed * directions[0];
+			//y += Clock.delta()* speed * directions[1];
 		}
 	}
 	
@@ -135,7 +135,19 @@ public class Enemy {
 		Tile down = grid.getTile(s.getXPlace(), s.getYPlace()+ 1);
 		Tile left = grid.getTile(s.getXPlace()-1, s.getYPlace());
 		
-		if(s.getType() == up.getType()){
+		if(s.getType() == up.getType() && directions[1] != 1){
+			dir[0] = 0;
+			dir[1] = -1;
+		} else if (s.getType() == right.getType()&& directions[0] != 1){
+			dir[0]= 1;
+			dir[1]= 0;
+		} else if (s.getType() == down.getType()&& directions[1] != -1){
+			dir[0]= 0;
+			dir[1]= 1;
+		}else if (s.getType() == left.getType()&& directions[0] != 1){
+			dir[0]= -1;
+			dir[1]= 0;
+		}else if(s.getType() == up.getType() ){
 			dir[0] = 0;
 			dir[1] = -1;
 		} else if (s.getType() == right.getType()){

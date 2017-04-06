@@ -42,7 +42,9 @@ public class Boot {
 			Clock.update();
 		
 			grid.draw();
-			wave.update();
+			//wave.update();
+			e.update();
+			e.draw();
 			player.update();;
 	
 			
