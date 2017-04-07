@@ -17,7 +17,6 @@ public class Enemy {
 	private float speed;
 	Texture texture;
 	private Tile startTile;
-	//private Tile currentTile;
 	private boolean first = true;
 	private TileGrid grid;
 	
@@ -26,7 +25,6 @@ public class Enemy {
 	
 	public Enemy(Texture texture, Tile startTile, TileGrid grid, int width, int height, float speed){
 		this.startTile = startTile;
-		//this.currentTile = startTile;
 		this.texture = texture;
 		this.x= startTile.getX();
 		this.y= startTile.getY();
@@ -50,14 +48,16 @@ public class Enemy {
 			first = false;
 		else{
 			/**/if(checkpointreached()){
-				currentCheckpoint++;
+				if(currentCheckpoint + 1 == checkpoints.size()){
+					System.out.println("Enemy reached end of maze");
+				}else{
+					currentCheckpoint++;
+				}
+
 			} else{
 				x += Clock.delta() * checkpoints.get(currentCheckpoint).getxDirection() * speed;
 				y += Clock.delta() * checkpoints.get(currentCheckpoint).getyDirection() * speed;
 			}/**/
-			//findNextDirection(s);
-			//x += Clock.delta()* speed * directions[0];
-			//y += Clock.delta()* speed * directions[1];
 		}
 	}
 	
@@ -76,7 +76,6 @@ public class Enemy {
 	}
 	
 	private void pupolateCheckpointList(){
-		//Tile currentTile = startTile;
 		checkpoints.add(findNextCheckpoint(startTile, directions = findNextDirection(startTile)));
 		
 		int counter = 0;
@@ -84,7 +83,6 @@ public class Enemy {
 		while (keepGoing){
 			System.out.println("populando");
 			int[] currentD = findNextDirection(checkpoints.get(counter).getTile());
-			//if (currentD[0] == 2 || grid.outOfBound(checkpoints.get(counter).getTile().getXPlace(), checkpoints.get(counter).getTile().getYPlace())){
 			if (currentD[0] == 2 || counter > 20){	
 				keepGoing = false;
 				System.out.println("vdd");
@@ -147,40 +145,13 @@ public class Enemy {
 		}else if (s.getType() == left.getType()&& directions[0] != 1){
 			dir[0]= -1;
 			dir[1]= 0;
-		}else if(s.getType() == up.getType() ){
-			dir[0] = 0;
-			dir[1] = -1;
-		} else if (s.getType() == right.getType()){
-			dir[0]= 1;
-			dir[1]= 0;
-		} else if (s.getType() == down.getType()){
-			dir[0]= 0;
-			dir[1]= 1;
-		}else if (s.getType() == left.getType()){
-			dir[0]= -1;
-			dir[1]= 0;
 		}else{
-			//dir[0]= 0;
-			//dir[1]= 0;
 			dir[0]= 2;
 			dir[1]= 2;
 		}
 		return dir;
 	}
 	
-	/*
-	public boolean pathContinues(){
-		boolean answer = true;
-		
-		Tile myTile = grid.getTile((int)(x/64),(int)(y/64));
-		Tile nextTile = grid.getTile((int)(x/64) + 1,(int)(y/64));
-		
-		if(myTile.getType() != nextTile.getType()){
-			answer = false;
-		}
-		
-		return answer;
-	}*/
 	
 	public void draw(){
 		Artist.drawQuadText(texture, x, y, width, height);

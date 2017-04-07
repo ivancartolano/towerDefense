@@ -1,10 +1,11 @@
 package data;
 
-//import helper.Artist;
 
 public class TileGrid {
 
-	public Tile[][] map;
+	private Tile[][] map;
+	private int tileWide;
+	private int tileHigh;
 	
 	public TileGrid(){
 		map = new Tile[20][15];

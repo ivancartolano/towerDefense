@@ -34,7 +34,10 @@ public class Boot {
 		TileGrid grid = new TileGrid(map);
 		grid.setTile(3, 4, grid.getTile(5, 7).getType());
 		//Enemy e = new Enemy(Artist.quickLoad("timeAzulSoldado"),grid.getTile(4, 4),grid, 50, 50, 5);
-		Enemy e = new Enemy(Artist.quickLoad("dragon64"),grid.getTile(5, 4),grid, 64, 64, 2);
+		//Enemy e = new Enemy(Artist.quickLoad("dragon64"),grid.getTile(5, 4),grid, 64, 64, 4);
+		//Enemy e = new Enemy(Artist.quickLoad("panda64"),grid.getTile(5, 4),grid, 64, 64, 4);
+		Enemy e = new Enemy(Artist.quickLoad("skeleton64"),grid.getTile(5, 4),grid, 64, 64, 4);
+		//Enemy e = new Enemy(Artist.quickLoad("spider64"),grid.getTile(5, 4),grid, 64, 64, 4);
 		Wave wave = new Wave(20, e);
 		Player player = new Player(grid);
 		while(!Display.isCloseRequested()){
@@ -42,9 +45,9 @@ public class Boot {
 			Clock.update();
 		
 			grid.draw();
-			//wave.update();
-			e.update();
-			e.draw();
+			wave.update();
+			//e.update();
+			//e.draw();
 			player.update();;
 	
 			
