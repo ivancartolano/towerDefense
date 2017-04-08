@@ -18,6 +18,7 @@ public class Enemy {
 	Texture texture;
 	private Tile startTile;
 	private boolean first = true;
+	private boolean alive = true;
 	private TileGrid grid;
 	
 	private ArrayList<Checkpoint> checkpoints;
@@ -49,7 +50,7 @@ public class Enemy {
 		else{
 			/**/if(checkpointreached()){
 				if(currentCheckpoint + 1 == checkpoints.size()){
-					System.out.println("Enemy reached end of maze");
+					die();
 				}else{
 					currentCheckpoint++;
 				}
@@ -108,7 +109,7 @@ public class Enemy {
 		while(!found){
 			
 			System.out.println("achando next checkpoint");
-			
+
 			if(s.getType() != 
 					grid.getTile(s.getXPlace()+ dir[0]* counter,
 							s.getYPlace() + dir[1]* counter).getType()){
@@ -136,7 +137,7 @@ public class Enemy {
 		if(s.getType() == up.getType() && directions[1] != 1){
 			dir[0] = 0;
 			dir[1] = -1;
-		} else if (s.getType() == right.getType()&& directions[0] != 1){
+		} else if (s.getType() == right.getType()&& directions[0] != -1){
 			dir[0]= 1;
 			dir[1]= 0;
 		} else if (s.getType() == down.getType()&& directions[1] != -1){
@@ -152,7 +153,15 @@ public class Enemy {
 		return dir;
 	}
 	
+	private void die(){
+		alive = false;
+	}
 	
+	
+	public boolean isAlive() {
+		return alive;
+	}
+
 	public void draw(){
 		Artist.drawQuadText(texture, x, y, width, height);
 	}

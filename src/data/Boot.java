@@ -14,11 +14,11 @@ public class Boot {
 		Artist.beginSession();
 		
 		int[][] map = {
-				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0},
-				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0},
-				{0,0,0,0,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
+				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,1},
+				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,1},
+				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,1},
+				{0,0,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1},
 				{0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0},
 				{0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0},
 				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -34,10 +34,7 @@ public class Boot {
 		TileGrid grid = new TileGrid(map);
 		grid.setTile(3, 4, grid.getTile(5, 7).getType());
 		//Enemy e = new Enemy(Artist.quickLoad("timeAzulSoldado"),grid.getTile(4, 4),grid, 50, 50, 5);
-		//Enemy e = new Enemy(Artist.quickLoad("dragon64"),grid.getTile(5, 4),grid, 64, 64, 4);
-		//Enemy e = new Enemy(Artist.quickLoad("panda64"),grid.getTile(5, 4),grid, 64, 64, 4);
-		Enemy e = new Enemy(Artist.quickLoad("skeleton64"),grid.getTile(5, 4),grid, 64, 64, 4);
-		//Enemy e = new Enemy(Artist.quickLoad("spider64"),grid.getTile(5, 4),grid, 64, 64, 4);
+		Enemy e = new Enemy(Artist.quickLoad("skeleton64"),grid.getTile(5, 4),grid, 64, 64, 6);
 		Wave wave = new Wave(20, e);
 		Player player = new Player(grid);
 		while(!Display.isCloseRequested()){

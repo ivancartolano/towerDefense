@@ -26,8 +26,10 @@ public class Wave {
 		}
 		
 		for (Enemy e: enemyList){
-			e.update();
-			e.draw();
+			if (e.isAlive()){
+				e.update();
+				e.draw();
+			}
 		}
 	}
 	

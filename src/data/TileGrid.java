@@ -17,8 +17,9 @@ public class TileGrid {
 	}
 	
 	public TileGrid(int[][] newMap){
-		//map = new Tile[20][15];
-		map = new Tile[20][10];
+		this.tileWide = newMap[0].length;
+		this.tileHigh= newMap.length;
+		map = new Tile[tileWide][tileHigh];
 		for(int i = 0; i < map.length; i++){
 			for(int j = 0; j< map[i].length; j++){
 				map[i][j] = new Tile(i * 64, j*64, 64, 64, TileType.grass);
@@ -42,19 +43,23 @@ public class TileGrid {
 	}
 	
 	public Tile getTile(int xPlace, int yPlace){
-		return map[xPlace][yPlace];
+		if( inBound(xPlace, yPlace)){
+			return map[xPlace][yPlace];
+		}else{
+			return new Tile(0,0,0,0,TileType.nothing);
+		}
 	}
 	
 	public boolean inBound(int x, int y){
 		boolean answer = true;
-		if ((x< 0 || x > 20) || (y<0 || y>10))
+		if ((x< 0 || x >= tileWide) || (y<0 || y>=tileHigh))
 			answer = false;
 		return answer;
 	}
 	
 	public boolean outOfBound(int x, int y){
 		boolean answer = false;
-		if ((x< 0 || x > 20) || (y<0 || y>10))
+		if ((x< 0 || x >= tileWide) || (y<0 || y>=tileHigh))
 			answer = true;
 		return answer;
 	}
